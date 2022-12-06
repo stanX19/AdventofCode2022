@@ -5,7 +5,7 @@
 
 int evaluate_piriority(char c)
 {
-	if ('a' < c and c < 'z')
+	if ('a' <= c and c <= 'z')
 		return (c % 97) + 1;
 	return (c % 65) + 27;
 }
@@ -44,10 +44,12 @@ int total_piriority(std::string path)
 		std::getline(inFile, compA);
 		if (compA.back() == '\r')
 			compA.pop_back();
-		compB = compA.substr(compA.length() / 2, compA.length());
+		compB = compA.substr(compA.length() / 2, compA.length() / 2);
 		compA = compA.substr(0, compA.length() / 2);
-		//std::cout << compA << " | " << compB << '\n';
-		ret += evaluate_piriority(common_character(compA, compB));
+		char c = common_character(compA, compB);
+		int val = evaluate_piriority(c);
+		ret += val;
+		std::cout << compA << " | " << compB << " | " << c << " : " << val << '\n';
 	}
 	inFile.close();
 	return ret;
