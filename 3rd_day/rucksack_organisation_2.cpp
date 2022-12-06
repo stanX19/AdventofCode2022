@@ -7,49 +7,60 @@ int evaluate_piriority(char c)
 {
 	if ('a' <= c and c <= 'z')
 		return (c % 97) + 1;
-	return (c % 65) + 27;
+	else if ('A' <= c and c <= 'Z')
+		return (c % 65) + 27;
+	return (int)0x80000000;
 }
 
-char common_character(std::string compA, std::string compB)
+char common_character(std::string bagA, std::string bagB, std::string bagC)
 {
 	std::string::iterator	iterA;
 	std::string::iterator	iterB;
+	std::string::iterator	iterC;
 
-	for (iterA = compA.begin(); iterA != compA.end(); iterA++)
+	for (iterA = bagA.begin(); iterA != bagA.end(); iterA++)
 	{
-		for (iterB = compB.begin(); iterB != compB.end(); iterB++)
+		for (iterB = bagB.begin(); iterB != bagB.end(); iterB++)
 		{
 			//std::cout << *iterA << " | " << *iterB << '\n';
 			if (*iterA == *iterB)
 			{
-				return *iterA;
+				for (iterC = bagC.begin(); iterC != bagC.end(); iterC++)
+				{	
+					if (*iterA == *iterC)
+						return *iterA;
+				}
 			}
 		}
 	}
 
+	std::cout << "Warning: no match!\n";
 	return 0;
 }
 
 int total_piriority(std::string path)
 {
 	std::ifstream	inFile;
-	std::string		compA;  // compartmentA
-	std::string		compB;
+	std::string		bagA;
+	std::string		bagB;
+	std::string		bagC;
 	int				ret;
 
 	ret = 0;
 	inFile.open(path);
 	while (!inFile.eof())
 	{
-		std::getline(inFile, compA);
-		if (compA.back() == '\r')
-			compA.pop_back();
-		compB = compA.substr(compA.length() / 2, compA.length() / 2);
-		compA = compA.substr(0, compA.length() / 2);
-		char c = common_character(compA, compB);
-		int val = evaluate_piriority(c);
-		ret += val;
-		std::cout << compA << " | " << compB << " | " << c << " : " << val << '\n';
+		std::getline(inFile, bagA);
+		std::getline(inFile, bagB);
+		std::getline(inFile, bagC);
+		if (bagA.back() == '\r')
+		{
+			bagA.pop_back();
+			bagB.pop_back();
+			bagC.pop_back();
+		}
+		ret += evaluate_piriority(common_character(bagA, bagB, bagC));
+		std::cout << bagA << " | " << bagB << " | " << bagC << '\n';
 	}
 	inFile.close();
 	return ret;
