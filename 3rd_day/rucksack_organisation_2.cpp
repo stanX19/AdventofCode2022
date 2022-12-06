@@ -46,7 +46,10 @@ int total_piriority(std::string path)
 			compA.pop_back();
 		compB = compA.substr(compA.length() / 2, compA.length() / 2);
 		compA = compA.substr(0, compA.length() / 2);
-		ret += evaluate_piriority(common_character(compA, compB));
+		char c = common_character(compA, compB);
+		int val = evaluate_piriority(c);
+		ret += val;
+		std::cout << compA << " | " << compB << " | " << c << " : " << val << '\n';
 	}
 	inFile.close();
 	return ret;
