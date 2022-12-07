@@ -18,11 +18,8 @@ void process_command(std::string str, std::vector<std::string> &stacks)
 	start = str.find(" to ", start + 1) + 4;  // "1 to 2"
 	dst = std::stoi(&(str[start])) - 1;
 
-	for (int i = 0; i < count; i++){
-		c = stacks[src].back();
-		stacks[src].pop_back();
-		stacks[dst].push_back(c);
-	}
+	stacks[dst] += stacks[src].substr(stacks[src].length() - count, count);
+	stacks[src].erase(stacks[src].length() - count, count);
 }
 
 std::vector<std::string> generate_stacks(std::ifstream &inFile)
