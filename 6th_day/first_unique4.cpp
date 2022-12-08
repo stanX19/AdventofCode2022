@@ -19,7 +19,7 @@ bool all_unique(const std::string& str, size_t start_idx, size_t n)
 
 size_t first_n_unique_char(const std::string& line, size_t n)
 {
-    for (size_t i = 0; i < line.size(); i++)
+    for (size_t i = 0; i < line.size() - n; i++)
     {
         if (all_unique(line, i, n))
         {

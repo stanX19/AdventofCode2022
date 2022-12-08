@@ -1,7 +1,7 @@
 NAME	= main
 SRCS1	= first_unique4.cpp
 SRCS2	= first_unique14.cpp
-GCC		= g++ -Wfatal-errors
+GCC		= g++ -Wfatal-errors -fsanitize=address
 ARGV	= files/input2.txt
 
 
