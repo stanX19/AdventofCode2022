@@ -1,21 +1,14 @@
-#include <iostream>
+#include <fstream>
 #include <string>
+#include <iostream>
 
-void swap(int *a, int *b)
-{
-	int temp;
+int main() {
+  std::ifstream file("input.txt");
+  std::string line;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
+  while (std::getline(file, line)) {
+    std::cout << "|" << line << "| " << file.eof() << '\n';
+  }
 
-int main(void)
-{
-	std::string	line;
-	int			age;
-
-	line = "Hello world!";
-	std::cout << line.back();
-	return 0;
+  return 0;
 }
