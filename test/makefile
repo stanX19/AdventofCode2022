@@ -1,5 +1,5 @@
 NAME	= main
-SRCS	= split_line_in_file.cpp
+SRCS	= file_loop.cpp
 GCC		= g++ -Wfatal-errors
 
 run:
