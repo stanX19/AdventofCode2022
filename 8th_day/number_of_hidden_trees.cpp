@@ -13,13 +13,13 @@ void map_print(std::vector<std::vector<int>> &map) {
 	}
 }
 
-int	map_count(std::vector<std::vector<int>> &map, int target) {
+int	map_count_visible(std::vector<std::vector<int>> &map) {
 	int ret;
 
 	ret = 0;
 	for (std::vector<int> &row : map){
 		for (int &val : row) {
-			if (val == target)
+			if (val)
 				ret++;
 		}
 	}
@@ -98,7 +98,7 @@ int total_visible_trees(std::string path)
 	status = process_map(map);
 	std::cout << "Status:\n";
 	map_print(status);
-	ret = map_count(status, 1) + map_count(status, 2) + map_count(status, 3) + map_count(status, 4);
+	ret = map_count_visible(status);
 	inFile.close();
 	return ret;
 }
