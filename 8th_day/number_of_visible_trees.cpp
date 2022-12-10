@@ -90,15 +90,15 @@ int total_visible_trees(std::string path)
 {
 	std::ifstream					inFile;
 	std::vector<std::vector<int>>	map;
-	std::vector<std::vector<int>>	status;
+	std::vector<std::vector<int>>	visibility;
 	int								ret;
 
 	inFile.open(path);
 	map = generate_map(inFile);
-	status = process_map(map);
-	std::cout << "Status:\n";
-	map_print(status);
-	ret = map_count_visible(status);
+	visibility = process_map(map);
+	std::cout << "visibility:\n";
+	map_print(visibility);
+	ret = map_count_visible(visibility);
 	inFile.close();
 	return ret;
 }
