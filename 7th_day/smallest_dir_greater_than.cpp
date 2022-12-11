@@ -144,12 +144,12 @@ Directory* generate_root_from_file(std::string path) {
 }
 
 
-std::string smallest_file_name(std::string path)
+int smallest_file_name(std::string path)
 {
 	Directory	*root;
 	size_t		needed_size;
 	Directory	*result;
-	std::string	ret;
+	int	ret;
 
 	root = generate_root_from_file(path);
 	//root->list();
@@ -159,10 +159,10 @@ std::string smallest_file_name(std::string path)
 	std::cout << "needed size: " << needed_size << '\n';
 	result = smallest_dir_greater_than(root, needed_size);
 	if (result)
-		ret = result->name;
+		ret = result->getFinalSize();
 	else
-		ret = "None satisfies";
-	std::cout << ret << " size: " << result->getFinalSize() << '\n';
+		ret = -1;
+	std::cout << "Name: " << result->name << '\n';
 	root->delete_dir();
 	return ret;
 }
@@ -171,7 +171,7 @@ std::string smallest_file_name(std::string path)
 int main(int argc, char** argv)
 {
 	std::string path;
-	std::string	result;
+	int	result;
 
 	if (argc == 1)
 		path = "files/input.txt";
