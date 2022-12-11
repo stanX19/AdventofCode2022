@@ -92,8 +92,8 @@ Directory* smallest_dir_greater_than(Directory *cwd, size_t min_size){
 	ret = nullptr;
 	for (const std::pair<std::string, Directory*> &pair : cwd->subdirectories){
 		if (pair.first != "..") {
-			subdir = smallest_dir_greater_than(pair.second, min_size);  // if there is a dir that satisfies
-			if (subdir) {
+			subdir = smallest_dir_greater_than(pair.second, min_size);
+			if (subdir) {  // if there is a dir that satisfies
 				temp_size = subdir->getFinalSize();
 				if (temp_size < smallest) {
 					smallest = temp_size;
