@@ -79,24 +79,18 @@ bool update_tail(t_cord &tail, t_cord &head) {
 	int dy = head.y - tail.y;
 	int dx = head.x - tail.x;
 
-	if (std::abs(dy) >= 2) { // vertical
+	if (std::abs(dy) >= 2) { // vertical drag
 		ret = 1;
-		if (dy > 0)
-			tail.y = head.y - 1;  // head is above tail
-		else
-			tail.y = head.y + 1;  // head is below tail
+		tail.y = (dy > 0) ? head.y - 1 : head.y + 1;
 	}
-	else if (std::abs(dx) >= 2) // if there is drag
+	else if (std::abs(dx) >= 2) // drag but not vertical
 		tail.y = head.y;
 
-	if (std::abs(dx) >= 2) {  // horizontal
+	if (std::abs(dx) >= 2) {  // horizontal drag
 		ret = 1;
-		if (dx > 0)
-			tail.x = head.x - 1;  // head is at right of tail
-		else
-			tail.x = head.x + 1;  // head is at left of tail
+		tail.x = (dx > 0) ? head.x - 1 : head.x + 1;
 	}
-	else if (std::abs(dy) >= 2)
+	else if (std::abs(dy) >= 2)  // drag but not horizontal
 		tail.x = head.x;
 	return ret;
 }
